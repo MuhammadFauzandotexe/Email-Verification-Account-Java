@@ -40,5 +40,5 @@ nb-configuration.xml
 .env
 .dockerignore
 README.md
-src/main/resources
+src/main/resources/application.properties
 
