@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
-
 @Entity
 public class UserData extends PanacheEntityBase {
     @Id
@@ -21,7 +20,7 @@ public class UserData extends PanacheEntityBase {
     public String password;
     public Date createat;
     public Date updateat;
-
+    public String verification;
     @JsonGetter
     public String getUuid() {
         return uuid;
