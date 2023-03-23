@@ -1,6 +1,5 @@
 package Controller;
 import Model.UserData;
-import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
 import Util.Bash64Token;
 import javax.inject.Inject;
@@ -30,12 +29,10 @@ public class Registration {
         Timestamp timeNow = new Timestamp(date.getTime());
         UserData userData = new UserData();
         String Domain = "http://localhost:9000/verify/";
-
         String emailPattern = "^((?!\\.)[\\w_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])";
         String email = body.getString("email");
         String username = body.getString("username");
         String password = body.getString("password");
-
         if(EmailAddressCheck(email,emailPattern)){
             userData.password = password;
             userData.createat = timeNow;
@@ -49,10 +46,10 @@ public class Registration {
                         "Thank you for registering as a member of Beretta Indonesia.\n" +
                         "Next, let's verify your account via the following link: \n"+
                         Domain+bash64Token.getBash64();
-                mailer.send(Mail.withText(email, "Beretta Email Verification",message));
+                //mailer.send(Mail.withText(email, "Beretta Email Verification",message));
                 status = "successful registration \n" +
                         "verify your account via the link we sent to your email address \n" +
-                        "the link will expire after 24 hours.\n";
+                        "the link will expire after 24 hours.\n"+message;
             }
         }else {
             status = "your email address is invalid";

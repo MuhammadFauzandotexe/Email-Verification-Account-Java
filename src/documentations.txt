@@ -1,0 +1,22 @@
+Properties props = new Properties();
+props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+props.put(ConsumerConfig.GROUP_ID_CONFIG, "group1");
+props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer");
+props.put("schema.registry.url", "http://localhost:8081");
+props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+props.put(KafkaJsonDeserializerConfig.JSON_VALUE_TYPE, User.class.getName());
+
+String topic = "testjsonschema";
+final Consumer<String, JsonNode> consumer = new KafkaConsumer<String, JsonNode>(props);
+consumer.subscribe(Arrays.asList(topic));
+
+try {
+  while (true) {
+    ConsumerRecords<String, JsonNode> records = consumer.poll(100);
+    User user= mapper.convertValue(record.value(), new TypeReference<User>(){});
+    }
+  }
+} finally {
+  consumer.close();
+}

@@ -21,6 +21,7 @@ public class UserData extends PanacheEntityBase {
     public Date createat;
     public Date updateat;
     public String verification;
+
     @JsonGetter
     public String getUuid() {
         return uuid;
